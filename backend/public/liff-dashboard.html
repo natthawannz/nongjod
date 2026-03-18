@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>กำลังเปิด Dashboard...</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+    }
+    .container {
+      text-align: center;
+      padding: 2rem;
+    }
+    .spinner {
+      border: 4px solid rgba(255,255,255,0.3);
+      border-radius: 50%;
+      border-top: 4px solid white;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 1rem;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="spinner"></div>
+    <h2>กำลังเปิด Dashboard...</h2>
+    <p id="status">กำลังโหลด...</p>
+  </div>
+
+  <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+  <script>
+    const statusEl = document.getElementById('status');
+
+    function parseNextPath() {
+      try {
+        const sp = new URLSearchParams(window.location.search || '');
+        let nextRaw = String(sp.get('next') || '').trim();
+
+        // When opened via `https://liff.line.me/<LIFF_ID>`, query params are often moved into `liff.state`.
+        // Example: `?liff.state=%3Fnext%3D%252Fbudget`
+        if (!nextRaw) {
+          const stateRaw = String(sp.get('liff.state') || '').trim();
+          if (stateRaw) {
+            // `liff.state` can be:
+            // - "?next=%2Fbudget"
+            // - "/?next=%2Fbudget"
+            // - "/path?next=%2Fbudget"
+            let stateStr = stateRaw;
+            // Best-effort decode (LINE sometimes double-encodes).
+            for (let i = 0; i < 2; i++) {
+              try { if (stateStr.includes('%')) stateStr = decodeURIComponent(stateStr); } catch {}
+            }
+            const qIndex = stateStr.indexOf('?');
+            const queryOnly = qIndex >= 0 ? stateStr.slice(qIndex + 1) : (stateStr.startsWith('?') ? stateStr.slice(1) : stateStr);
+            const sp2 = new URLSearchParams(queryOnly);
+            nextRaw = String(sp2.get('next') || '').trim();
+          }
+        }
+
+        // Best-effort decode (some environments double-encode).
+        for (let i = 0; i < 2; i++) {
+          try { if (nextRaw.includes('%')) nextRaw = decodeURIComponent(nextRaw); } catch {}
+        }
+
+        const nextPath = nextRaw && nextRaw.startsWith('/') ? nextRaw : '';
+        return nextPath;
+      } catch {
+        return '';
+      }
+    }
+
+    async function main() {
+      try {
+        // Initialize LIFF
+        const liffId = '{{LIFF_ID}}'; // Replace with your LIFF ID from LINE Developers Console
+        await liff.init({ liffId });
+
+        if (!liff.isLoggedIn()) {
+          statusEl.textContent = 'กำลัง login...';
+          liff.login();
+          return;
+        }
+
+        // Get user profile
+        const profile = await liff.getProfile();
+        const userId = profile.userId;
+
+        // Encode userId
+        const encodedUserId = btoa(userId);
+
+        // Optional deep-link path inside the web app (must start with "/")
+        const nextPath = parseNextPath();
+
+        // Call backend one-tap endpoint (creates a one-time session then redirects to the web dashboard)
+        const backendUrl = window.location.origin;
+        const displayName = profile && profile.displayName ? String(profile.displayName) : '';
+        const pictureUrl = profile && profile.pictureUrl ? String(profile.pictureUrl) : '';
+        const dnParam = displayName ? `&dn=${encodeURIComponent(displayName)}` : '';
+        const picParam = pictureUrl ? `&pic=${encodeURIComponent(pictureUrl)}` : '';
+        const redirectUrl = `${backendUrl}/webhooks/line/open-dashboard?uid=${encodedUserId}${nextPath ? `&next=${encodeURIComponent(nextPath)}` : ''}${dnParam}${picParam}`;
+
+        statusEl.textContent = 'เปิด Dashboard...';
+
+        // Redirect
+        window.location.href = redirectUrl;
+
+      } catch (error) {
+        console.error('LIFF error:', error);
+        statusEl.textContent = 'เกิดข้อผิดพลาด: ' + error.message;
+      }
+    }
+
+    main();
+  </script>
+</body>
+</html>

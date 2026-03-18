@@ -1,6 +1,10 @@
 "use client";
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import LoadingMascot from '@/components/LoadingMascot';
+
+// Use same-origin requests in the browser and rely on Next.js `rewrites()` to reach the backend.
+const API_BASE = '';
 
 export default function Notifications() {
   const [notifications, setNotifications] = useState([]);
@@ -19,7 +23,7 @@ export default function Notifications() {
   const fetchNotifications = async (token) => {
     try {
       setLoading(true);
-      const res = await fetch('http://localhost:5050/api/notifications', {
+      const res = await fetch(`${API_BASE}/api/notifications`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -43,24 +47,11 @@ export default function Notifications() {
     }
   };
 
-  // ฟังก์ชันแยกข้อมูลจาก alertMessage
-  const parseNotification = (alertMessage) => {
-    const match = alertMessage.match(/(.+): หมวด (.+) เหลือ (\d+\.?\d*) บาท/);
-    if (match) {
-      const [, month, categoryName, amountLeft] = match;
-      return { amountLeft: parseFloat(amountLeft) };
-    }
-    return { amountLeft: 0 };
-  };
-
   if (loading) {
     return (
       <main className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 flex items-center justify-center">
         <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg border border-white/20 p-8">
-          <div className="flex items-center space-x-3">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
-            <span className="text-slate-600 font-medium">กำลังโหลด...</span>
-          </div>
+          <LoadingMascot label="กำลังโหลด..." size={88} />
         </div>
       </main>
     );
@@ -116,28 +107,37 @@ export default function Notifications() {
           ) : (
             <div className="space-y-4">
               {notifications.map((notification, index) => {
-                const { amountLeft } = parseNotification(notification.alertMessage);
                 const amountSpent = parseFloat(notification.amountSpent || 0);
                 const budgetTotal = parseFloat(notification.budgetTotal || 0);
                 const percentage = budgetTotal > 0 ? (amountSpent / budgetTotal) * 100 : 0;
+                const remaining = budgetTotal - amountSpent;
+                const overAmount = Math.max(0, amountSpent - budgetTotal);
+                const status =
+                  percentage >= 100 ? 'เกินงบ'
+                    : percentage >= 90 ? 'ระวัง'
+                      : percentage >= 80 ? 'ใกล้เกิน'
+                        : 'ปกติ';
+                const statusTone =
+                  percentage >= 100 ? 'bg-red-100 text-red-700'
+                    : percentage >= 90 ? 'bg-yellow-100 text-yellow-700'
+                      : percentage >= 80 ? 'bg-amber-100 text-amber-700'
+                        : 'bg-green-100 text-green-700';
+                const dotTone =
+                  percentage >= 100 ? 'bg-red-500'
+                    : percentage >= 80 ? 'bg-primary'
+                      : 'bg-green-500';
 
                 return (
                   <div key={index} className="bg-gradient-to-r from-slate-50 to-slate-100 rounded-2xl p-6 border border-slate-200/50 hover:shadow-md transition-all duration-200">
                     <div className="flex items-start justify-between mb-4">
                       <div className="flex items-center gap-3">
-                        <div className={`w-3 h-3 rounded-full ${amountLeft < 50 ? 'bg-red-500' : 'bg-primary'}`}></div>
+                        <div className={`w-3 h-3 rounded-full ${dotTone}`}></div>
                         <h3 className="text-lg font-semibold text-slate-800">
                           {notification.month}: หมวด {notification.categoryName}
                         </h3>
                       </div>
-                      <div className={`px-3 py-1 rounded-full text-sm font-medium ${
-                        amountLeft < 50 
-                          ? 'bg-red-100 text-red-700' 
-                          : amountLeft < 100 
-                            ? 'bg-yellow-100 text-yellow-700' 
-                            : 'bg-green-100 text-green-700'
-                      }`}>
-                        {amountLeft < 50 ? 'เตือน' : amountLeft < 100 ? 'ระวัง' : 'ปกติ'}
+                      <div className={`px-3 py-1 rounded-full text-sm font-medium ${statusTone}`}>
+                        {status}
                       </div>
                     </div>
 
@@ -161,8 +161,8 @@ export default function Notifications() {
                     {/* Stats Grid */}
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                       <div className="bg-white/60 rounded-xl p-4 text-center">
-                        <div className="text-2xl font-bold text-slate-800">{amountLeft.toFixed(0)}</div>
-                        <div className="text-sm text-slate-500">บาทที่เหลือ</div>
+                        <div className="text-2xl font-bold text-slate-800">{Math.abs(remaining).toFixed(0)}</div>
+                        <div className="text-sm text-slate-500">{remaining >= 0 ? 'บาทที่เหลือ' : 'บาทที่เกิน'}</div>
                       </div>
                       <div className="bg-white/60 rounded-xl p-4 text-center">
                         <div className="text-2xl font-bold text-slate-800">{amountSpent.toFixed(0)}</div>
@@ -173,6 +173,12 @@ export default function Notifications() {
                         <div className="text-sm text-slate-500">งบทั้งหมด</div>
                       </div>
                     </div>
+
+                    {overAmount > 0 && (
+                      <div className="mt-4 text-sm font-semibold text-red-700 bg-red-50 border border-red-200/60 rounded-xl px-4 py-3">
+                        เกินงบ {overAmount.toFixed(0)} บาท
+                      </div>
+                    )}
                   </div>
                 );
               })}

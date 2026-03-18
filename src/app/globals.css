@@ -30,7 +30,7 @@
   --error: #ef4444; /* red */
   
   /* Background colors */
-  --background: #F3F3F3; /* very light gray */
+  --background: #ffffff; /* white */
   --surface: #ffffff; /* white */
   --surface-dark: #191919; /* black */
   --sidebar: #191919; /* black */
@@ -70,9 +70,14 @@
 
 /* dark mode removed */
 
+html,
 body {
-  background: #fff;
-  color: var(--text);
+  height: 100%;
+}
+
+body {
+  background: var(--app-bg, #fff);
+  color: var(--app-text, var(--text));
   font-family: var(--font-sans), sans-serif;
   transition: all 0.3s ease;
   line-height: 1.6;
@@ -80,6 +85,133 @@ body {
   padding: 0;
   min-height: 100vh;
   overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
+}
+
+/* App theme (light/dark) */
+.app {
+  --app-bg: #ffffff;
+  --app-surface: #ffffff;
+  --app-surface-2: rgba(15, 23, 42, 0.03);
+  --app-surface-3: rgba(15, 23, 42, 0.06);
+  --app-text: #0f172a;
+  --app-muted: #64748b;
+  --app-muted-2: rgba(100, 116, 139, 0.75);
+  --app-border: rgba(15, 23, 42, 0.08);
+  --app-accent: #22c55e;
+  --app-accent-2: #10b981;
+  --app-danger: #fb7185;
+}
+
+.app-light {
+  /* Light mode: keep contrast crisp (avoid washed-out surfaces) */
+  --app-bg: #ffffff;
+  --app-surface: #ffffff;
+  --app-surface-2: rgba(15, 23, 42, 0.03);
+  --app-surface-3: rgba(15, 23, 42, 0.06);
+  --app-text: #0b1220;
+  --app-muted: #334155;
+  --app-muted-2: rgba(51, 65, 85, 0.70);
+  --app-border: rgba(15, 23, 42, 0.16);
+  --app-accent: #10b981; /* emerald-500 */
+  --app-accent-2: #047857; /* emerald-700 */
+  --app-danger: #fb7185;
+}
+
+.app-dark {
+  --app-bg: #04161c;
+  --app-surface: #0b2730;
+  --app-surface-2: rgba(255, 255, 255, 0.05);
+  --app-surface-3: #071f26;
+  --app-text: #f8fafc;
+  --app-muted: rgba(148, 163, 184, 0.9);
+  --app-muted-2: rgba(148, 163, 184, 0.75);
+  --app-border: rgba(255, 255, 255, 0.10);
+  --app-accent: #22c55e;
+  --app-accent-2: #10b981;
+  --app-danger: #fb7185;
+}
+
+/* Reusable primitives (match reference look) */
+.app-card {
+  background: var(--app-surface);
+  border: 1px solid var(--app-border);
+  border-radius: 1.5rem;
+}
+
+.app-card-soft {
+  background: var(--app-surface-2);
+  border: 1px solid var(--app-border);
+  border-radius: 1.25rem;
+}
+
+.app-btn-ghost {
+  background: var(--app-surface-2);
+  border: 1px solid var(--app-border);
+  border-radius: 1rem;
+}
+
+.app-text-muted {
+  color: var(--app-muted);
+}
+
+/* Light-mode compatibility for existing dark-leaning Tailwind utilities */
+.app-light .bg-white\/5 { background-color: var(--app-surface-2) !important; }
+.app-light .bg-white\/10 { background-color: var(--app-surface-3) !important; }
+.app-light .border-white\/10 { border-color: var(--app-border) !important; }
+.app-light .ring-white\/10 { --tw-ring-color: var(--app-border) !important; }
+.app-light .bg-black\/25 { background-color: rgba(15, 23, 42, 0.10) !important; }
+.app-light .text-slate-100,
+.app-light .text-slate-200 { color: var(--app-text) !important; }
+.app-light .text-slate-300,
+.app-light .text-slate-400 { color: var(--app-muted) !important; }
+.app-light .text-emerald-200 { color: var(--app-accent-2) !important; }
+.app-light .text-emerald-300 { color: var(--app-accent-2) !important; }
+.app-light .bg-emerald-500\/15 { background-color: rgba(16, 185, 129, 0.20) !important; }
+.app-light .ring-emerald-400\/25 { --tw-ring-color: rgba(16, 185, 129, 0.35) !important; }
+.app-light .bg-emerald-500\/10 { background-color: rgba(16, 185, 129, 0.16) !important; }
+.app-light .bg-emerald-500\/20 { background-color: rgba(16, 185, 129, 0.26) !important; }
+
+/* Vivid colored badges (transactions, chips, etc.) */
+.app-light .bg-orange-500\/15 { background-color: rgba(249, 115, 22, 0.16) !important; }
+.app-light .bg-sky-500\/15 { background-color: rgba(14, 165, 233, 0.16) !important; }
+.app-light .bg-violet-500\/15 { background-color: rgba(139, 92, 246, 0.16) !important; }
+.app-light .bg-rose-500\/15 { background-color: rgba(244, 63, 94, 0.15) !important; }
+.app-light .bg-amber-500\/15 { background-color: rgba(245, 158, 11, 0.16) !important; }
+.app-light .bg-teal-500\/15 { background-color: rgba(20, 184, 166, 0.16) !important; }
+
+.app-light .text-orange-200 { color: #9a3412 !important; }
+.app-light .text-sky-200 { color: #075985 !important; }
+.app-light .text-violet-200 { color: #5b21b6 !important; }
+.app-light .text-rose-200 { color: #9f1239 !important; }
+.app-light .text-amber-200 { color: #854d0e !important; }
+.app-light .text-teal-200 { color: #115e59 !important; }
+
+.app-light .ring-orange-400\/20 { --tw-ring-color: rgba(249, 115, 22, 0.30) !important; }
+.app-light .ring-sky-400\/20 { --tw-ring-color: rgba(56, 189, 248, 0.30) !important; }
+.app-light .ring-violet-400\/20 { --tw-ring-color: rgba(167, 139, 250, 0.30) !important; }
+.app-light .ring-rose-400\/20 { --tw-ring-color: rgba(251, 113, 133, 0.30) !important; }
+.app-light .ring-amber-400\/20 { --tw-ring-color: rgba(250, 204, 21, 0.34) !important; }
+.app-light .ring-teal-400\/20 { --tw-ring-color: rgba(45, 212, 191, 0.30) !important; }
+
+/* Animations */
+@keyframes app-floaty {
+  0% { transform: translate3d(0, 0, 0) rotate(-1deg); }
+  50% { transform: translate3d(0, -16px, 0) rotate(2deg); }
+  100% { transform: translate3d(0, 0, 0) rotate(-1deg); }
+}
+
+.animate-floaty {
+  animation: app-floaty 3.8s ease-in-out infinite;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-floaty {
+    animation: none;
+  }
 }
 
 /* Modern utility classes */

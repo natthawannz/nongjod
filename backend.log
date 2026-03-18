@@ -1,0 +1,579 @@
+[dotenv@17.2.1] injecting env (5) from .env -- tip: ⚙️  specify custom .env file path with { path: '/custom/path/.env' }
+LINE webhook module loaded. CHANNEL_TOKEN present: 2T3xRAfI...
+Server running on port 5050
+Connected to MongoDB
+Fetching user for ID: 697de48e7b8cb2ef2f7ddc76
+Fetching user for ID: 697de48e7b8cb2ef2f7ddc76
+Parsed transaction: { type: 'expense', amount: 20, note: 'ค่าขนม' }
+LINE reply success 99ba775e24f24278a277bbc7a855861e {
+  type: 'text',
+  text: 'บันทึกเรียบร้อย: จ่าย 20 ค่าขนม\n' +
+    'ได้รับยอด 20 บาท สำหรับ: ค่าขนม\n' +
+    'บันทึกเมื่อ: 1/31/2026, 6:17:19 PM (test)'
+}
+Fetching user for ID: 697de48e7b8cb2ef2f7ddc76
+Fetching user for ID: 697de48e7b8cb2ef2f7ddc76
+Parsed transaction: { type: 'income', amount: 20, note: '' }
+LINE reply success fb5a90556fe142f1a3a61f1433aa3ea5 {
+  type: 'text',
+  text: 'บันทึกเรียบร้อย: รับ 20\n' +
+    'ได้รับยอด 20 บาท สำหรับ: -\n' +
+    'บันทึกเมื่อ: 1/31/2026, 6:22:16 PM (test)'
+}
+Fetching user for ID: 697de48e7b8cb2ef2f7ddc76
+Fetching user for ID: 697de48e7b8cb2ef2f7ddc76
+Fetching user for ID: 697de48e7b8cb2ef2f7ddc76
+Fetching user for ID: 697de48e7b8cb2ef2f7ddc76
+Fetching user for ID: 697de48e7b8cb2ef2f7ddc76
+Fetching user for ID: 697de48e7b8cb2ef2f7ddc76
+Fetching user for ID: 697de48e7b8cb2ef2f7ddc76
+Fetching user for ID: 697de48e7b8cb2ef2f7ddc76
+LINE reply success 4b0c9701e2424745ae1eaab9b2692909 {
+  type: 'text',
+  text: 'ขอโทษครับ ผมไม่เข้าใจคำสั่ง พิมพ์ help เพื่อดูคำสั่งตัวอย่าง'
+}
+LINE reply success 2c2d79b77a7c4fb2afc6f98185545a54 {
+  type: 'text',
+  text: 'ขอโทษครับ ผมไม่เข้าใจคำสั่ง พิมพ์ help เพื่อดูคำสั่งตัวอย่าง'
+}
+LINE reply success c3f5427c755343da806bc5c2cd51133b {
+  type: 'text',
+  text: 'ขอโทษครับ ผมไม่เข้าใจคำสั่ง พิมพ์ help เพื่อดูคำสั่งตัวอย่าง'
+}
+LINE reply success d3d60bd5d3df42af8a30589c6f2415bc {
+  type: 'text',
+  text: 'ขอโทษครับ ผมไม่เข้าใจคำสั่ง พิมพ์ help เพื่อดูคำสั่งตัวอย่าง'
+}
+LINE reply success 8c1c189ff995469e9e0ef14757fea27b {
+  type: 'text',
+  text: 'ขอโทษครับ ผมไม่เข้าใจคำสั่ง พิมพ์ help เพื่อดูคำสั่งตัวอย่าง'
+}
+LINE reply success 709e4bba262f4b7384f2250b2679bc45 {
+  type: 'text',
+  text: 'ขอโทษครับ ผมไม่เข้าใจคำสั่ง พิมพ์ help เพื่อดูคำสั่งตัวอย่าง'
+}
+No X-Line-Signature header — allowing in non-production for testing
+LINE reply error HTTPError: Request failed with status code 400
+    at HTTPClient.wrapError (/Users/witchayuen./BalanzNew/backend/node_modules/@line/bot-sdk/dist/http.js:106:20)
+    at /Users/witchayuen./BalanzNew/backend/node_modules/@line/bot-sdk/dist/http.js:19:88
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Axios.request (/Users/witchayuen./BalanzNew/backend/node_modules/axios/dist/node/axios.cjs:4708:14)
+    at async HTTPClient.post (/Users/witchayuen./BalanzNew/backend/node_modules/@line/bot-sdk/dist/http.js:33:21)
+    at async sendReply (/Users/witchayuen./BalanzNew/backend/routes/line.js:27:15)
+    at async /Users/witchayuen./BalanzNew/backend/routes/line.js:198:11
+    at async Promise.all (index 0)
+    at async /Users/witchayuen./BalanzNew/backend/routes/line.js:195:5 {
+  statusCode: 400,
+  statusMessage: 'Bad Request',
+  originalError: AxiosError: Request failed with status code 400
+      at settle (/Users/witchayuen./BalanzNew/backend/node_modules/axios/dist/node/axios.cjs:2086:12)
+      at IncomingMessage.handleStreamEnd (/Users/witchayuen./BalanzNew/backend/node_modules/axios/dist/node/axios.cjs:3476:11)
+      at IncomingMessage.emit (node:events:530:35)
+      at endReadableNT (node:internal/streams/readable:1698:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {
+    isAxiosError: true,
+    code: 'ERR_BAD_REQUEST',
+    config: {
+      transitional: [Object],
+      adapter: [Array],
+      transformRequest: [Array],
+      transformResponse: [Array],
+      timeout: 0,
+      xsrfCookieName: 'XSRF-TOKEN',
+      xsrfHeaderName: 'X-XSRF-TOKEN',
+      maxContentLength: -1,
+      maxBodyLength: -1,
+      env: [Object],
+      validateStatus: [Function: validateStatus],
+      headers: [Object [AxiosHeaders]],
+      method: 'post',
+      url: 'https://api.line.me/v2/bot/message/reply',
+      data: '{"messages":[{"type":"text","text":"ขอโทษครับ ผมไม่เข้าใจคำสั่ง พิมพ์ help เพื่อดูคำสั่งตัวอย่าง"}],"replyToken":"test-reply-token-12345","notificationDisabled":false}',
+      allowAbsoluteUrls: true
+    },
+    request: ClientRequest {
+      _events: [Object: null prototype],
+      _eventsCount: 7,
+      _maxListeners: undefined,
+      outputData: [],
+      outputSize: 0,
+      writable: true,
+      destroyed: false,
+      _last: false,
+      chunkedEncoding: false,
+      shouldKeepAlive: false,
+      maxRequestsOnConnectionReached: false,
+      _defaultKeepAlive: true,
+      useChunkedEncodingByDefault: true,
+      sendDate: false,
+      _removedConnection: false,
+      _removedContLen: false,
+      _removedTE: false,
+      strictContentLength: false,
+      _contentLength: 271,
+      _hasBody: true,
+      _trailer: '',
+      finished: true,
+      _headerSent: true,
+      _closed: false,
+      _header: 'POST /v2/bot/message/reply HTTP/1.1\r\n' +
+        'Accept: application/json, text/plain, */*\r\n' +
+        'Content-Type: application/json\r\n' +
+        'Authorization: Bearer 2T3xRAfIoQ6VodCOFUug4eyJkfKOs35q8DC/bATSQTSp63tuDehkkqg1teF3NqHZwqdTh/a+IUox6RzTJzjfjbDUUVXczF9toxrAUZuA6/kKdqYGNllkb87w0Zjqg9sQlyeGY1DJUSEvmwLq5hOpegdB04t89/1O/w1cDnyilFU=\r\n' +
+        'User-Agent: @line/bot-sdk/8.4.1\r\n' +
+        'Content-Length: 271\r\n' +
+        'Accept-Encoding: gzip, compress, deflate, br\r\n' +
+        'Host: api.line.me\r\n' +
+        'Connection: keep-alive\r\n' +
+        '\r\n',
+      _keepAliveTimeout: 0,
+      _onPendingData: [Function: nop],
+      agent: [Agent],
+      socketPath: undefined,
+      method: 'POST',
+      maxHeaderSize: undefined,
+      insecureHTTPParser: undefined,
+      joinDuplicateHeaders: undefined,
+      path: '/v2/bot/message/reply',
+      _ended: true,
+      res: [IncomingMessage],
+      aborted: false,
+      timeoutCb: [Function: emitRequestTimeout],
+      upgradeOrConnect: false,
+      parser: null,
+      maxHeadersCount: null,
+      reusedSocket: false,
+      host: 'api.line.me',
+      protocol: 'https:',
+      _redirectable: [Writable],
+      [Symbol(shapeMode)]: false,
+      [Symbol(kCapture)]: false,
+      [Symbol(kBytesWritten)]: 0,
+      [Symbol(kNeedDrain)]: false,
+      [Symbol(corked)]: 0,
+      [Symbol(kChunkedBuffer)]: [],
+      [Symbol(kChunkedLength)]: 0,
+      [Symbol(kSocket)]: [TLSSocket],
+      [Symbol(kOutHeaders)]: [Object: null prototype],
+      [Symbol(errored)]: null,
+      [Symbol(kHighWaterMark)]: 65536,
+      [Symbol(kRejectNonStandardBodyWrites)]: false,
+      [Symbol(kUniqueHeaders)]: null
+    },
+    response: {
+      status: 400,
+      statusText: 'Bad Request',
+      headers: [Object [AxiosHeaders]],
+      config: [Object],
+      request: [ClientRequest],
+      data: [Object]
+    },
+    status: 400
+  }
+}
+No X-Line-Signature header — allowing in non-production for testing
+LINE reply error HTTPError: Request failed with status code 400
+    at HTTPClient.wrapError (/Users/witchayuen./BalanzNew/backend/node_modules/@line/bot-sdk/dist/http.js:106:20)
+    at /Users/witchayuen./BalanzNew/backend/node_modules/@line/bot-sdk/dist/http.js:19:88
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Axios.request (/Users/witchayuen./BalanzNew/backend/node_modules/axios/dist/node/axios.cjs:4708:14)
+    at async HTTPClient.post (/Users/witchayuen./BalanzNew/backend/node_modules/@line/bot-sdk/dist/http.js:33:21)
+    at async sendReply (/Users/witchayuen./BalanzNew/backend/routes/line.js:27:15)
+    at async /Users/witchayuen./BalanzNew/backend/routes/line.js:198:11
+    at async Promise.all (index 0)
+    at async /Users/witchayuen./BalanzNew/backend/routes/line.js:195:5 {
+  statusCode: 400,
+  statusMessage: 'Bad Request',
+  originalError: AxiosError: Request failed with status code 400
+      at settle (/Users/witchayuen./BalanzNew/backend/node_modules/axios/dist/node/axios.cjs:2086:12)
+      at IncomingMessage.handleStreamEnd (/Users/witchayuen./BalanzNew/backend/node_modules/axios/dist/node/axios.cjs:3476:11)
+      at IncomingMessage.emit (node:events:530:35)
+      at endReadableNT (node:internal/streams/readable:1698:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {
+    isAxiosError: true,
+    code: 'ERR_BAD_REQUEST',
+    config: {
+      transitional: [Object],
+      adapter: [Array],
+      transformRequest: [Array],
+      transformResponse: [Array],
+      timeout: 0,
+      xsrfCookieName: 'XSRF-TOKEN',
+      xsrfHeaderName: 'X-XSRF-TOKEN',
+      maxContentLength: -1,
+      maxBodyLength: -1,
+      env: [Object],
+      validateStatus: [Function: validateStatus],
+      headers: [Object [AxiosHeaders]],
+      method: 'post',
+      url: 'https://api.line.me/v2/bot/message/reply',
+      data: '{"messages":[{"type":"text","text":"ขอโทษครับ ผมไม่เข้าใจคำสั่ง พิมพ์ help เพื่อดูคำสั่งตัวอย่าง"}],"replyToken":"test-reply-token-12345","notificationDisabled":false}',
+      allowAbsoluteUrls: true
+    },
+    request: ClientRequest {
+      _events: [Object: null prototype],
+      _eventsCount: 7,
+      _maxListeners: undefined,
+      outputData: [],
+      outputSize: 0,
+      writable: true,
+      destroyed: false,
+      _last: false,
+      chunkedEncoding: false,
+      shouldKeepAlive: false,
+      maxRequestsOnConnectionReached: false,
+      _defaultKeepAlive: true,
+      useChunkedEncodingByDefault: true,
+      sendDate: false,
+      _removedConnection: false,
+      _removedContLen: false,
+      _removedTE: false,
+      strictContentLength: false,
+      _contentLength: 271,
+      _hasBody: true,
+      _trailer: '',
+      finished: true,
+      _headerSent: true,
+      _closed: false,
+      _header: 'POST /v2/bot/message/reply HTTP/1.1\r\n' +
+        'Accept: application/json, text/plain, */*\r\n' +
+        'Content-Type: application/json\r\n' +
+        'Authorization: Bearer 2T3xRAfIoQ6VodCOFUug4eyJkfKOs35q8DC/bATSQTSp63tuDehkkqg1teF3NqHZwqdTh/a+IUox6RzTJzjfjbDUUVXczF9toxrAUZuA6/kKdqYGNllkb87w0Zjqg9sQlyeGY1DJUSEvmwLq5hOpegdB04t89/1O/w1cDnyilFU=\r\n' +
+        'User-Agent: @line/bot-sdk/8.4.1\r\n' +
+        'Content-Length: 271\r\n' +
+        'Accept-Encoding: gzip, compress, deflate, br\r\n' +
+        'Host: api.line.me\r\n' +
+        'Connection: keep-alive\r\n' +
+        '\r\n',
+      _keepAliveTimeout: 0,
+      _onPendingData: [Function: nop],
+      agent: [Agent],
+      socketPath: undefined,
+      method: 'POST',
+      maxHeaderSize: undefined,
+      insecureHTTPParser: undefined,
+      joinDuplicateHeaders: undefined,
+      path: '/v2/bot/message/reply',
+      _ended: true,
+      res: [IncomingMessage],
+      aborted: false,
+      timeoutCb: [Function: emitRequestTimeout],
+      upgradeOrConnect: false,
+      parser: null,
+      maxHeadersCount: null,
+      reusedSocket: false,
+      host: 'api.line.me',
+      protocol: 'https:',
+      _redirectable: [Writable],
+      [Symbol(shapeMode)]: false,
+      [Symbol(kCapture)]: false,
+      [Symbol(kBytesWritten)]: 0,
+      [Symbol(kNeedDrain)]: false,
+      [Symbol(corked)]: 0,
+      [Symbol(kChunkedBuffer)]: [],
+      [Symbol(kChunkedLength)]: 0,
+      [Symbol(kSocket)]: [TLSSocket],
+      [Symbol(kOutHeaders)]: [Object: null prototype],
+      [Symbol(errored)]: null,
+      [Symbol(kHighWaterMark)]: 65536,
+      [Symbol(kRejectNonStandardBodyWrites)]: false,
+      [Symbol(kUniqueHeaders)]: null
+    },
+    response: {
+      status: 400,
+      statusText: 'Bad Request',
+      headers: [Object [AxiosHeaders]],
+      config: [Object],
+      request: [ClientRequest],
+      data: [Object]
+    },
+    status: 400
+  }
+}
+No X-Line-Signature header — allowing in non-production for testing
+LINE reply error HTTPError: Request failed with status code 400
+    at HTTPClient.wrapError (/Users/witchayuen./BalanzNew/backend/node_modules/@line/bot-sdk/dist/http.js:106:20)
+    at /Users/witchayuen./BalanzNew/backend/node_modules/@line/bot-sdk/dist/http.js:19:88
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Axios.request (/Users/witchayuen./BalanzNew/backend/node_modules/axios/dist/node/axios.cjs:4708:14)
+    at async HTTPClient.post (/Users/witchayuen./BalanzNew/backend/node_modules/@line/bot-sdk/dist/http.js:33:21)
+    at async sendReply (/Users/witchayuen./BalanzNew/backend/routes/line.js:27:15)
+    at async /Users/witchayuen./BalanzNew/backend/routes/line.js:198:11
+    at async Promise.all (index 0)
+    at async /Users/witchayuen./BalanzNew/backend/routes/line.js:195:5 {
+  statusCode: 400,
+  statusMessage: 'Bad Request',
+  originalError: AxiosError: Request failed with status code 400
+      at settle (/Users/witchayuen./BalanzNew/backend/node_modules/axios/dist/node/axios.cjs:2086:12)
+      at IncomingMessage.handleStreamEnd (/Users/witchayuen./BalanzNew/backend/node_modules/axios/dist/node/axios.cjs:3476:11)
+      at IncomingMessage.emit (node:events:530:35)
+      at endReadableNT (node:internal/streams/readable:1698:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {
+    isAxiosError: true,
+    code: 'ERR_BAD_REQUEST',
+    config: {
+      transitional: [Object],
+      adapter: [Array],
+      transformRequest: [Array],
+      transformResponse: [Array],
+      timeout: 0,
+      xsrfCookieName: 'XSRF-TOKEN',
+      xsrfHeaderName: 'X-XSRF-TOKEN',
+      maxContentLength: -1,
+      maxBodyLength: -1,
+      env: [Object],
+      validateStatus: [Function: validateStatus],
+      headers: [Object [AxiosHeaders]],
+      method: 'post',
+      url: 'https://api.line.me/v2/bot/message/reply',
+      data: '{"messages":[{"type":"text","text":"ขอโทษครับ ผมไม่เข้าใจคำสั่ง พิมพ์ help เพื่อดูคำสั่งตัวอย่าง"}],"replyToken":"test-reply-token-12345","notificationDisabled":false}',
+      allowAbsoluteUrls: true
+    },
+    request: ClientRequest {
+      _events: [Object: null prototype],
+      _eventsCount: 7,
+      _maxListeners: undefined,
+      outputData: [],
+      outputSize: 0,
+      writable: true,
+      destroyed: false,
+      _last: false,
+      chunkedEncoding: false,
+      shouldKeepAlive: false,
+      maxRequestsOnConnectionReached: false,
+      _defaultKeepAlive: true,
+      useChunkedEncodingByDefault: true,
+      sendDate: false,
+      _removedConnection: false,
+      _removedContLen: false,
+      _removedTE: false,
+      strictContentLength: false,
+      _contentLength: 271,
+      _hasBody: true,
+      _trailer: '',
+      finished: true,
+      _headerSent: true,
+      _closed: false,
+      _header: 'POST /v2/bot/message/reply HTTP/1.1\r\n' +
+        'Accept: application/json, text/plain, */*\r\n' +
+        'Content-Type: application/json\r\n' +
+        'Authorization: Bearer 2T3xRAfIoQ6VodCOFUug4eyJkfKOs35q8DC/bATSQTSp63tuDehkkqg1teF3NqHZwqdTh/a+IUox6RzTJzjfjbDUUVXczF9toxrAUZuA6/kKdqYGNllkb87w0Zjqg9sQlyeGY1DJUSEvmwLq5hOpegdB04t89/1O/w1cDnyilFU=\r\n' +
+        'User-Agent: @line/bot-sdk/8.4.1\r\n' +
+        'Content-Length: 271\r\n' +
+        'Accept-Encoding: gzip, compress, deflate, br\r\n' +
+        'Host: api.line.me\r\n' +
+        'Connection: keep-alive\r\n' +
+        '\r\n',
+      _keepAliveTimeout: 0,
+      _onPendingData: [Function: nop],
+      agent: [Agent],
+      socketPath: undefined,
+      method: 'POST',
+      maxHeaderSize: undefined,
+      insecureHTTPParser: undefined,
+      joinDuplicateHeaders: undefined,
+      path: '/v2/bot/message/reply',
+      _ended: true,
+      res: [IncomingMessage],
+      aborted: false,
+      timeoutCb: [Function: emitRequestTimeout],
+      upgradeOrConnect: false,
+      parser: null,
+      maxHeadersCount: null,
+      reusedSocket: false,
+      host: 'api.line.me',
+      protocol: 'https:',
+      _redirectable: [Writable],
+      [Symbol(shapeMode)]: false,
+      [Symbol(kCapture)]: false,
+      [Symbol(kBytesWritten)]: 0,
+      [Symbol(kNeedDrain)]: false,
+      [Symbol(corked)]: 0,
+      [Symbol(kChunkedBuffer)]: [],
+      [Symbol(kChunkedLength)]: 0,
+      [Symbol(kSocket)]: [TLSSocket],
+      [Symbol(kOutHeaders)]: [Object: null prototype],
+      [Symbol(errored)]: null,
+      [Symbol(kHighWaterMark)]: 65536,
+      [Symbol(kRejectNonStandardBodyWrites)]: false,
+      [Symbol(kUniqueHeaders)]: null
+    },
+    response: {
+      status: 400,
+      statusText: 'Bad Request',
+      headers: [Object [AxiosHeaders]],
+      config: [Object],
+      request: [ClientRequest],
+      data: [Object]
+    },
+    status: 400
+  }
+}
+LINE reply success 763d45597aee451bb6b155cc164978ce {
+  type: 'text',
+  text: 'ขอโทษครับ ผมไม่เข้าใจคำสั่ง พิมพ์ help เพื่อดูคำสั่งตัวอย่าง'
+}
+LINE reply success a21623f11f114274b9cf817068529e15 {
+  type: 'text',
+  text: 'ขอโทษครับ ผมไม่เข้าใจคำสั่ง พิมพ์ help เพื่อดูคำสั่งตัวอย่าง'
+}
+LINE reply success 37065c285e154d27b8d9dab8eb22a160 {
+  type: 'text',
+  text: 'คำสั่งตัวอย่าง:\n' +
+    '- จ่าย 120 ข้าวมันไก่\n' +
+    '- รับ 500 เงินลูกค้า\n' +
+    '- สรุปวันนี้\n' +
+    '- สรุปเดือนนี้\n' +
+    '- export'
+}
+LINE reply success 998425a2af5d402aa9e48774f7d5d4e8 {
+  type: 'text',
+  text: 'คำสั่งตัวอย่าง:\n' +
+    '- จ่าย 120 ข้าวมันไก่\n' +
+    '- รับ 500 เงินลูกค้า\n' +
+    '- สรุปวันนี้\n' +
+    '- สรุปเดือนนี้\n' +
+    '- export'
+}
+LINE reply success 10cf0825ea354d2ca86122272eb6b743 {
+  type: 'text',
+  text: 'ขอโทษครับ ผมไม่เข้าใจคำสั่ง พิมพ์ help เพื่อดูคำสั่งตัวอย่าง'
+}
+LINE reply success b1d17a7274a3430cae1acf26c4d303eb {
+  type: 'text',
+  text: 'ขอโทษครับ ผมไม่เข้าใจคำสั่ง พิมพ์ help เพื่อดูคำสั่งตัวอย่าง'
+}
+Parsed transaction: { type: 'expense', amount: 20, note: 'ค่ากับข้าว' }
+LINE reply success 1520cf0b438545f6a1c413c7a957fa3d {
+  type: 'text',
+  text: 'บันทึกเรียบร้อย: จ่าย 20 ค่ากับข้าว\n' +
+    'ได้รับยอด 20 บาท สำหรับ: ค่ากับข้าว\n' +
+    'บันทึกเมื่อ: 1/31/2026, 7:51:13 PM (test)'
+}
+LINE reply success 8eccafdf53444e5f801af9f4c0bcd10c {
+  type: 'text',
+  text: 'ขอโทษครับ ผมไม่เข้าใจคำสั่ง พิมพ์ help เพื่อดูคำสั่งตัวอย่าง'
+}
+No X-Line-Signature header — allowing in non-production for testing
+LINE reply error HTTPError: Request failed with status code 400
+    at HTTPClient.wrapError (/Users/witchayuen./BalanzNew/backend/node_modules/@line/bot-sdk/dist/http.js:106:20)
+    at /Users/witchayuen./BalanzNew/backend/node_modules/@line/bot-sdk/dist/http.js:19:88
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Axios.request (/Users/witchayuen./BalanzNew/backend/node_modules/axios/dist/node/axios.cjs:4708:14)
+    at async HTTPClient.post (/Users/witchayuen./BalanzNew/backend/node_modules/@line/bot-sdk/dist/http.js:33:21)
+    at async sendReply (/Users/witchayuen./BalanzNew/backend/routes/line.js:27:15)
+    at async /Users/witchayuen./BalanzNew/backend/routes/line.js:198:11
+    at async Promise.all (index 0)
+    at async /Users/witchayuen./BalanzNew/backend/routes/line.js:195:5 {
+  statusCode: 400,
+  statusMessage: 'Bad Request',
+  originalError: AxiosError: Request failed with status code 400
+      at settle (/Users/witchayuen./BalanzNew/backend/node_modules/axios/dist/node/axios.cjs:2086:12)
+      at IncomingMessage.handleStreamEnd (/Users/witchayuen./BalanzNew/backend/node_modules/axios/dist/node/axios.cjs:3476:11)
+      at IncomingMessage.emit (node:events:530:35)
+      at endReadableNT (node:internal/streams/readable:1698:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {
+    isAxiosError: true,
+    code: 'ERR_BAD_REQUEST',
+    config: {
+      transitional: [Object],
+      adapter: [Array],
+      transformRequest: [Array],
+      transformResponse: [Array],
+      timeout: 0,
+      xsrfCookieName: 'XSRF-TOKEN',
+      xsrfHeaderName: 'X-XSRF-TOKEN',
+      maxContentLength: -1,
+      maxBodyLength: -1,
+      env: [Object],
+      validateStatus: [Function: validateStatus],
+      headers: [Object [AxiosHeaders]],
+      method: 'post',
+      url: 'https://api.line.me/v2/bot/message/reply',
+      data: '{"messages":[{"type":"text","text":"ขอโทษครับ ผมไม่เข้าใจคำสั่ง พิมพ์ help เพื่อดูคำสั่งตัวอย่าง"}],"replyToken":"test-reply-token-12345","notificationDisabled":false}',
+      allowAbsoluteUrls: true
+    },
+    request: ClientRequest {
+      _events: [Object: null prototype],
+      _eventsCount: 7,
+      _maxListeners: undefined,
+      outputData: [],
+      outputSize: 0,
+      writable: true,
+      destroyed: false,
+      _last: false,
+      chunkedEncoding: false,
+      shouldKeepAlive: false,
+      maxRequestsOnConnectionReached: false,
+      _defaultKeepAlive: true,
+      useChunkedEncodingByDefault: true,
+      sendDate: false,
+      _removedConnection: false,
+      _removedContLen: false,
+      _removedTE: false,
+      strictContentLength: false,
+      _contentLength: 271,
+      _hasBody: true,
+      _trailer: '',
+      finished: true,
+      _headerSent: true,
+      _closed: false,
+      _header: 'POST /v2/bot/message/reply HTTP/1.1\r\n' +
+        'Accept: application/json, text/plain, */*\r\n' +
+        'Content-Type: application/json\r\n' +
+        'Authorization: Bearer 2T3xRAfIoQ6VodCOFUug4eyJkfKOs35q8DC/bATSQTSp63tuDehkkqg1teF3NqHZwqdTh/a+IUox6RzTJzjfjbDUUVXczF9toxrAUZuA6/kKdqYGNllkb87w0Zjqg9sQlyeGY1DJUSEvmwLq5hOpegdB04t89/1O/w1cDnyilFU=\r\n' +
+        'User-Agent: @line/bot-sdk/8.4.1\r\n' +
+        'Content-Length: 271\r\n' +
+        'Accept-Encoding: gzip, compress, deflate, br\r\n' +
+        'Host: api.line.me\r\n' +
+        'Connection: keep-alive\r\n' +
+        '\r\n',
+      _keepAliveTimeout: 0,
+      _onPendingData: [Function: nop],
+      agent: [Agent],
+      socketPath: undefined,
+      method: 'POST',
+      maxHeaderSize: undefined,
+      insecureHTTPParser: undefined,
+      joinDuplicateHeaders: undefined,
+      path: '/v2/bot/message/reply',
+      _ended: true,
+      res: [IncomingMessage],
+      aborted: false,
+      timeoutCb: [Function: emitRequestTimeout],
+      upgradeOrConnect: false,
+      parser: null,
+      maxHeadersCount: null,
+      reusedSocket: false,
+      host: 'api.line.me',
+      protocol: 'https:',
+      _redirectable: [Writable],
+      [Symbol(shapeMode)]: false,
+      [Symbol(kCapture)]: false,
+      [Symbol(kBytesWritten)]: 0,
+      [Symbol(kNeedDrain)]: false,
+      [Symbol(corked)]: 0,
+      [Symbol(kChunkedBuffer)]: [],
+      [Symbol(kChunkedLength)]: 0,
+      [Symbol(kSocket)]: [TLSSocket],
+      [Symbol(kOutHeaders)]: [Object: null prototype],
+      [Symbol(errored)]: null,
+      [Symbol(kHighWaterMark)]: 65536,
+      [Symbol(kRejectNonStandardBodyWrites)]: false,
+      [Symbol(kUniqueHeaders)]: null
+    },
+    response: {
+      status: 400,
+      statusText: 'Bad Request',
+      headers: [Object [AxiosHeaders]],
+      config: [Object],
+      request: [ClientRequest],
+      data: [Object]
+    },
+    status: 400
+  }
+}
+LINE reply success f3a0aa41caf04d9d984ac31250d56a7e {
+  type: 'text',
+  text: 'ขอโทษครับ ผมไม่เข้าใจคำสั่ง พิมพ์ help เพื่อดูคำสั่งตัวอย่าง'
+}

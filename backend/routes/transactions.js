@@ -11,12 +11,31 @@ const authMiddleware = (req, res, next) => {
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    if (!decoded || !decoded.exp) return res.status(401).json({ message: 'Token expired' });
     req.user = decoded;
     next();
   } catch (error) {
+    if (error && error.name === 'TokenExpiredError') return res.status(401).json({ message: 'Token expired' });
     res.status(401).json({ message: 'Invalid token' });
   }
 };
+
+async function ensureOtherCategoryId({ userId, type } = {}) {
+  const safeType = type === 'income' ? 'income' : 'expense';
+  const name = 'อื่นๆ';
+
+  const existing = await Category.findOne({ userId, type: safeType, name }).select({ _id: 1 }).lean();
+  if (existing?._id) return existing._id;
+
+  try {
+    const created = await Category.create({ userId, type: safeType, name, icon: 'other', isDefault: false });
+    return created?._id || null;
+  } catch (e) {
+    // Unique index race
+    const retry = await Category.findOne({ userId, type: safeType, name }).select({ _id: 1 }).lean();
+    return retry?._id || null;
+  }
+}
 
 router.post('/', authMiddleware, async (req, res) => {
   const { amount, type, category, date, notes } = req.body;
@@ -33,15 +52,19 @@ router.post('/', authMiddleware, async (req, res) => {
     }
 
     let categoryId;
-    if (mongoose.Types.ObjectId.isValid(category)) {
-      categoryId = new mongoose.Types.ObjectId(category);
+    const categoryText = String(category || '').trim();
+    if (!categoryText) {
+      categoryId = await ensureOtherCategoryId({ userId: req.user.userId, type });
+    } else if (mongoose.Types.ObjectId.isValid(categoryText)) {
+      const found = await Category.findOne({ _id: new mongoose.Types.ObjectId(categoryText), userId: req.user.userId })
+        .select({ _id: 1 })
+        .lean();
+      categoryId = found?._id || (await ensureOtherCategoryId({ userId: req.user.userId, type }));
     } else {
-      const foundCategory = await Category.findOne({ name: category, userId: req.user.userId });
-      if (!foundCategory) {
-        return res.status(400).json({ message: 'Category not found' });
-      }
-      categoryId = foundCategory._id;
+      const foundCategory = await Category.findOne({ name: categoryText, userId: req.user.userId, type }).select({ _id: 1 }).lean();
+      categoryId = foundCategory?._id || (await ensureOtherCategoryId({ userId: req.user.userId, type }));
     }
+    if (!categoryId) return res.status(500).json({ message: 'Cannot resolve category' });
 
     let transactionDate;
     if (date.includes('T')) {
@@ -58,12 +81,14 @@ router.post('/', authMiddleware, async (req, res) => {
       userId: req.user.userId,
       amount: parseFloat(amount),
       type,
-      category: categoryId,
-      date: transactionDate,
-      notes,
+      categoryId: categoryId,
+      datetime: transactionDate,
+      note: notes || '',
     });
     await transaction.save();
-    res.status(201).json(transaction);
+    const saved = await Transaction.findById(transaction._id).populate('categoryId', 'name icon');
+    const sObj = saved.toObject();
+    res.status(201).json({ ...sObj, category: sObj.categoryId || null, date: sObj.datetime, notes: sObj.note || '' });
   } catch (error) {
     console.error('Server error:', error);
     res.status(500).json({ message: 'Server error: ' + error.message });
@@ -73,8 +98,12 @@ router.post('/', authMiddleware, async (req, res) => {
 router.get('/', authMiddleware, async (req, res) => {
   try {
     const transactions = await Transaction.find({ userId: req.user.userId })
-      .populate('category', 'name icon');
-    res.json(transactions);
+      .populate('categoryId', 'name icon');
+    const mapped = transactions.map(t => {
+      const obj = t.toObject();
+      return { ...obj, category: obj.categoryId || null, date: obj.datetime, notes: obj.note || '' };
+    });
+    res.json(mapped);
   } catch (error) {
     res.status(500).json({ message: 'Server error: ' + error.message });
   }
@@ -109,16 +138,21 @@ router.put('/:id', authMiddleware, async (req, res) => {
 
     if (category !== undefined) {
       let categoryId;
-      if (mongoose.Types.ObjectId.isValid(category)) {
-        categoryId = new mongoose.Types.ObjectId(category);
+      const categoryText = String(category || '').trim();
+      if (!categoryText) {
+        categoryId = await ensureOtherCategoryId({ userId: req.user.userId, type: transaction.type });
+      } else if (mongoose.Types.ObjectId.isValid(categoryText)) {
+        const found = await Category.findOne({ _id: new mongoose.Types.ObjectId(categoryText), userId: req.user.userId })
+          .select({ _id: 1 })
+          .lean();
+        categoryId = found?._id || (await ensureOtherCategoryId({ userId: req.user.userId, type: transaction.type }));
       } else {
-        const foundCategory = await Category.findOne({ name: category, userId: req.user.userId });
-        if (!foundCategory) {
-          return res.status(400).json({ message: 'Category not found' });
-        }
-        categoryId = foundCategory._id;
+        const foundCategory = await Category.findOne({ name: categoryText, userId: req.user.userId, type: transaction.type })
+          .select({ _id: 1 })
+          .lean();
+        categoryId = foundCategory?._id || (await ensureOtherCategoryId({ userId: req.user.userId, type: transaction.type }));
       }
-      transaction.category = categoryId;
+      transaction.categoryId = categoryId;
     }
 
     if (date !== undefined) {
@@ -131,16 +165,28 @@ router.put('/:id', authMiddleware, async (req, res) => {
       if (isNaN(transactionDate.getTime())) {
         return res.status(400).json({ message: `Invalid date format: ${date}` });
       }
-      transaction.date = transactionDate;
+      transaction.datetime = transactionDate;
     }
 
     if (notes !== undefined) {
-      transaction.notes = notes;
+      transaction.note = notes;
     }
 
     await transaction.save();
-    const updatedTransaction = await Transaction.findById(transaction._id).populate('category', 'name icon');
-    res.json(updatedTransaction);
+    const updatedTransaction = await Transaction.findById(transaction._id).populate('categoryId', 'name icon');
+    const uobj = updatedTransaction.toObject();
+    res.json({ ...uobj, category: uobj.categoryId || null, date: uobj.datetime, notes: uobj.note || '' });
+  } catch (error) {
+    console.error('Server error:', error);
+    res.status(500).json({ message: 'Server error: ' + error.message });
+  }
+});
+
+// Delete ALL transactions for authenticated user
+router.delete('/all', authMiddleware, async (req, res) => {
+  try {
+    const result = await Transaction.deleteMany({ userId: req.user.userId });
+    res.json({ message: 'Deleted all transactions', deletedCount: result?.deletedCount || 0 });
   } catch (error) {
     console.error('Server error:', error);
     res.status(500).json({ message: 'Server error: ' + error.message });

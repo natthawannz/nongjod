@@ -14,19 +14,19 @@
     "express-session": "^1.18.2",
     "framer-motion": "^12.23.22",
     "lucide-react": "^0.544.0",
-    "next": "15.4.6",
+    "next": "15.4.8",
     "passport": "^0.7.0",
     "passport-line": "^0.0.4",
-    "react": "19.1.0",
+    "react": "19.1.2",
     "react-chartjs-2": "^5.3.0",
-    "react-dom": "19.1.0",
+    "react-dom": "19.1.2",
     "tesseract.js": "^6.0.1"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
     "eslint": "^9",
-    "eslint-config-next": "15.4.6",
+    "eslint-config-next": "15.4.8",
     "tailwindcss": "^4"
   }
 }

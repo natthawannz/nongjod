@@ -19,9 +19,11 @@ const categorySchema = new mongoose.Schema({
     ref: 'User',
     required: true,
   },
+  isDefault: { type: Boolean, default: false },
 }, {
-  // เปลี่ยน index เป็น compound index ที่รวม type เพื่อให้ name ซ้ำได้ถ้า type ต่างกัน
-  indexes: [{ key: { userId: 1, name: 1, type: 1 }, unique: true }]
+  timestamps: true
 });
+
+categorySchema.index({ userId: 1, name: 1, type: 1 }, { unique: true });
 
 module.exports = mongoose.model('Category', categorySchema);

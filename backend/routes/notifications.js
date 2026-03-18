@@ -7,6 +7,43 @@ const Transaction = require('../models/Transaction');
 const Category = require('../models/Categories');
 const NotificationCount = require('../models/NotificationCount');
 
+const BANGKOK_TZ = 'Asia/Bangkok';
+const MONTH_NAMES_TH = [
+  'มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน',
+  'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม', 'พฤศจิกายน', 'ธันวาคม',
+];
+
+const getBangkokYearMonthIndex = (dateInput) => {
+  const d = new Date(dateInput);
+  if (Number.isNaN(d.getTime())) return null;
+  try {
+    const parts = new Intl.DateTimeFormat('en-CA', {
+      timeZone: BANGKOK_TZ,
+      year: 'numeric',
+      month: '2-digit',
+    }).formatToParts(d);
+    const map = {};
+    for (const p of parts) {
+      if (p?.type) map[p.type] = p.value;
+    }
+    const year = Number(map.year);
+    const month = Number(map.month);
+    if (!Number.isFinite(year) || !Number.isFinite(month)) return null;
+    return { year, monthIndex: month - 1 };
+  } catch {
+    return { year: d.getFullYear(), monthIndex: d.getMonth() };
+  }
+};
+
+const toThaiMonthLabel = (dateInput) => {
+  const p = getBangkokYearMonthIndex(dateInput);
+  if (!p) return '';
+  const monthName = MONTH_NAMES_TH[p.monthIndex] || '';
+  const buddhistYear = p.year + 543;
+  if (!monthName || !Number.isFinite(buddhistYear)) return '';
+  return `${monthName} ${buddhistYear}`;
+};
+
 // Middleware to verify JWT
 const authMiddleware = (req, res, next) => {
   const token = req.header('Authorization')?.replace('Bearer ', '');
@@ -14,9 +51,11 @@ const authMiddleware = (req, res, next) => {
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    if (!decoded || !decoded.exp) return res.status(401).json({ message: 'Token expired' });
     req.user = decoded;
     next();
   } catch (error) {
+    if (error && error.name === 'TokenExpiredError') return res.status(401).json({ message: 'Token expired' });
     res.status(401).json({ message: 'Invalid token' });
   }
 };
@@ -25,7 +64,7 @@ const authMiddleware = (req, res, next) => {
 const checkBudgetExceeded = async (userId, month) => {
   try {
     const budgets = await Budget.find({ userId, month });
-    const transactions = await Transaction.find({ userId });
+    const transactions = await Transaction.find({ userId, type: 'expense' });
 
     const alerts = [];
     const targetMonthYear = month; // เช่น "กันยายน 2568"
@@ -33,10 +72,10 @@ const checkBudgetExceeded = async (userId, month) => {
     for (const budget of budgets) {
       const totalSpent = transactions
         .filter(t => {
-          const tMonthYear = new Date(t.date).toLocaleString('th-TH', { month: 'long', year: 'numeric' });
-          return tMonthYear === targetMonthYear && t.category.toString() === budget.category.toString();
+          const tMonthYear = toThaiMonthLabel(t.datetime);
+          return tMonthYear === targetMonthYear && String(t.categoryId) === String(budget.category);
         })
-        .reduce((sum, t) => sum + t.amount, 0);
+        .reduce((sum, t) => sum + (Number(t.amount) || 0), 0);
 
       const budgetTotal = budget.total;
       const percentage = budgetTotal > 0 ? (totalSpent / budgetTotal) * 100 : 0;
@@ -48,9 +87,9 @@ const checkBudgetExceeded = async (userId, month) => {
         if (percentage >= 100) {
           alertMessage += `เกินงบ ${(totalSpent - budgetTotal).toFixed(2)} บาท (${percentage.toFixed(2)}%)`;
         } else if (percentage >= 90) {
-          alertMessage += `เหลือ ${((100 - percentage) * budgetTotal / 100).toFixed(2)} บาท (90% ถึง 100%)`;
+          alertMessage += `เหลือ ${(budgetTotal - totalSpent).toFixed(2)} บาท (90% ถึง 100%)`;
         } else if (percentage >= 80) {
-          alertMessage += `เหลือ ${((100 - percentage) * budgetTotal / 100).toFixed(2)} บาท (80% ถึง 90%)`;
+          alertMessage += `เหลือ ${(budgetTotal - totalSpent).toFixed(2)} บาท (80% ถึง 90%)`;
         }
 
         alerts.push({
@@ -82,7 +121,7 @@ const checkBudgetExceeded = async (userId, month) => {
 // Endpoint สำหรับดึงรายการแจ้งเตือน และรีเซ็ตจำนวนที่ยังไม่ได้อ่าน
 router.post('/notifications', authMiddleware, async (req, res) => {
   const { userId } = req.user;
-  const currentMonth = new Date().toLocaleString('th-TH', { month: 'long', year: 'numeric' });
+  const currentMonth = toThaiMonthLabel(Date.now());
   const alerts = await checkBudgetExceeded(userId, currentMonth);
 
   // รีเซ็ตจำนวนแจ้งเตือนที่ยังไม่ได้อ่านเมื่อผู้ใช้ดูรายการ
@@ -95,7 +134,7 @@ router.post('/notifications', authMiddleware, async (req, res) => {
 router.post('/check-budget', authMiddleware, async (req, res) => {
   const { userId } = req.user;
   const { month } = req.body || {};
-  const checkMonth = month || new Date().toLocaleString('th-TH', { month: 'long', year: 'numeric' });
+  const checkMonth = month || toThaiMonthLabel(Date.now());
   const alerts = await checkBudgetExceeded(userId, checkMonth);
 
   // ดึงจำนวนแจ้งเตือนจาก NotificationCount

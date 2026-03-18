@@ -10,7 +10,7 @@ import {
   Dumbbell, PawPrint, Scissors, CreditCard,
   Landmark, MoreHorizontal, Check, X, Plus,
   Calendar, StickyNote, Mic, MicOff, Save, ArrowLeft, ScanLine, Image as ImageIcon, Upload,
-  LayoutGrid, Book, BookOpen, Bus, Train, Truck, Bicycle, Apple, Banana, Beer, Cake, Camera, Film, Globe, MapPin, Sun, Moon, Star, Tree, Flower, Leaf, Cloud, Snowflake, Water, Fire, Key, Lock, Bell, AlarmClock, Wallet, PiggyBank, ShoppingCart, Shirt, Glasses, Watch, Tablet, Tv, Speaker, Headphones, Printer, Cpu, MousePointer, Pen, Pencil, Paintbrush, Ruler, Calculator, Clipboard, Paperclip, Archive, Box, Package, TruckDelivery, Rocket, Medal, Trophy, Award, Flag, Target, Lightbulb, Battery, Plug, Wifi, Bluetooth, Signal,
+  LayoutGrid, Book, BookOpen, Bus, Train, Truck, Bike, Apple, Banana, Beer, Cake, Camera, Film, Globe, MapPin, Sun, Moon, Star, Trees, Flower, Leaf, Cloud, Snowflake, Droplet, Flame, Key, Lock, Bell, AlarmClock, Wallet, PiggyBank, ShoppingCart, Shirt, Glasses, Watch, Tablet, Tv, Speaker, Headphones, Printer, Cpu, MousePointer, Pen, Pencil, Paintbrush, Ruler, Calculator, Clipboard, Paperclip, Archive, Box, Package, Rocket, Medal, Trophy, Award, Flag, Target, Lightbulb, Battery, Plug, Wifi, Bluetooth, Signal,
   Phone, MessageCircle, Mail, Send, Inbox, CalendarCheck, CalendarPlus, CalendarMinus, CalendarX, Users, User, UserCheck, UserPlus, UserMinus, UserX, UserCircle, UserSquare, UserCog, UserEdit, UserLock, UserShield, UserSearch, UserQuestion, UserStar, UserHeart, UserGroup, UserAdd, UserRemove, UserBan, UserPause, UserPlay, UserForward, UserRewind, UserStop, UserRecord, UserMic, UserVideo, UserCamera, UserImage, UserFile, UserFolder, UserArchive, UserTrash, UserSettings, UserInfo, UserAlert, UserHelp, UserWarning, UserError, UserSuccess, UserUp, UserDown, UserLeft, UserRight, UserHome, UserWork, UserSchool, UserHospital, UserShop, UserRestaurant, UserCafe, UserBar, UserClub, UserGym, UserSpa, UserHotel, UserTravel, UserCar, UserBike, UserBus, UserTrain, UserPlane, UserBoat, UserShip, UserTaxi, UserSubway, UserTram, UserTruck, UserVan, UserScooter, UserSkate, UserRoller, UserWheelchair, UserBaby, UserChild, UserTeen, UserAdult, UserSenior, UserPet, UserDog, UserCat, UserBird, UserFish, UserHorse, UserCow, UserPig, UserSheep, UserGoat, UserChicken, UserDuck, UserRabbit, UserHamster, UserTurtle, UserSnake, UserFrog, UserMonkey, UserElephant, UserLion, UserTiger, UserBear, UserWolf, UserFox, UserDeer, UserMoose, UserBuffalo, UserCamel, UserGiraffe, UserZebra, UserKangaroo, UserKoala, UserPanda, UserPenguin, UserSeal, UserWhale, UserDolphin, UserShark, UserOctopus, UserCrab, UserLobster, UserShrimp, UserSnail, UserBee, UserButterfly, UserAnt, UserSpider, UserScorpion, UserLadybug, UserDragonfly, UserMosquito, UserFly, UserWorm, UserMoth, UserGrasshopper, UserCaterpillar, UserCentipede, UserMillipede, UserSlug, UserLeech, UserTick, UserFlea, UserMite, UserAphid, UserLocust, UserCicada, UserFirefly, UserGlowworm, UserSilkworm, UserTermite, UserWeevil, UserBeetle, UserCockroach, UserEarwig, UserSilverfish, UserWoodlouse, UserSpringtail, UserMayfly, UserStonefly, UserDobsonfly, UserLacewing, UserAntlion, UserOwl, UserEagle, UserHawk, UserFalcon, UserVulture, UserCrow, UserRaven, UserMagpie, UserJay, UserJackdaw, UserChough, UserNutcracker, UserStarling, UserBlackbird, UserThrush, UserRobin, UserNightingale, UserWren, UserDipper, UserAccentor, UserWarbler, UserKinglet, UserTit, UserCreeper, UserNuthatch, UserTreecreeper, UserWallcreeper, UserSwallow, UserMartin, UserSwift, UserCuckoo, UserRoadrunner, UserAni, UserCoucal, UserHoopoe, UserHornbill, UserWoodpecker, UserBarbet, UserTrogon, UserMotmot, UserKingfisher, UserBeeEater, UserDollarbird, UserBroadbill, UserPitta, UserLyrebird, UserBowerbird, UserCatbird, UserBirdOfParadise, UserParadiseFlycatcher, UserDrongo, UserFantail, UserMonarch, UserMagpieLark, UserWagtail, UserPipit, UserLongclaw, UserThrushNightjar, UserNightjar, UserFrogmouth, UserOilbird, UserPotoo, UserSwiftlet, UserTreeSwift, UserHummingbird, UserSunbird, UserSpiderhunter, UserFlowerpecker, UserLeafbird, UserIora, UserBulbul, UserBabbler, UserLaughingthrush, UserShrike, UserVireo, UserGreenlet, UserTanager, UserCardinal, UserGrosbeak, UserBunting, UserSparrow, UserWeaver, UserWaxbill, UserMannikin, UserMunia, UserFinch, UserCanary, UserSerin, UserSiskin, UserRedpoll, UserGoldfinch, UserLinnet, UserTwite, UserCrossbill, UserPineGrosbeak, UserBullfinch, UserRosefinch, UserLongspur, UserSnowBunting, UserLaplandLongspur, UserSmithsLongspur, UserMcCownsLongspur, UserChestnutCollaredLongspur, UserThickBilledLongspur, UserBlackThroatedSparrow, UserWhiteCrownedSparrow, UserGoldenCrownedSparrow, UserHarrisSparrow, UserFoxSparrow, UserSongSparrow, UserLincolnSparrow, UserSwampSparrow, UserSavannahSparrow, UserGrasshopperSparrow, UserHenslowsSparrow, UserLeContesSparrow, UserNelsonsSparrow, UserSaltmarshSparrow, UserSeasideSparrow, UserSharpTailedSparrow, UserVesperSparrow, UserLark, UserSkylark, UserHornedLark, UserCrestedLark, UserCalandraLark, UserBimaculatedLark, UserGreaterShortToedLark, UserLesserShortToedLark, UserSandMartin, UserBankSwallow, UserCliffSwallow, UserBarnSwallow, UserTreeSwallow, UserPurpleMartin, UserNorthernRoughWingedSwallow, UserSouthernRoughWingedSwallow, UserBrownThrasher, UserSageThrasher, UserCurveBilledThrasher, UserLongBilledThrasher, UserBendiresThrasher, UserLeContesThrasher, UserCrissalThrasher, UserCaliforniaThrasher, UserLoggerheadShrike, UserNorthernShrike, UserGreatGreyShrike, UserRedBackedShrike, UserLesserGreyShrike, UserMaskedShrike, UserWoodchatShrike, UserIberianGreyShrike, UserSteppeGreyShrike, UserDesertGreyShrike, UserIsabellineShrike, UserBrownShrike, UserLongTailedShrike, UserGreyBackedShrike, UserBlackHeadedShrike, UserWhiteRumpedShrike, UserPiedShrike, UserBlackWingedShrike, UserWhiteWingedShrike, UserRedWingedShrike, UserYellowWingedShrike, UserGreenWingedShrike, UserBlueWingedShrike, UserPurpleWingedShrike, UserOrangeWingedShrike, UserPinkWingedShrike, UserGreyWingedShrike, UserBrownWingedShrike, UserBlackTailedShrike, UserWhiteTailedShrike, UserRedTailedShrike, UserYellowTailedShrike, UserGreenTailedShrike, UserBlueTailedShrike, UserPurpleTailedShrike, UserOrangeTailedShrike, UserPinkTailedShrike, UserGreyTailedShrike, UserBrownTailedShrike, UserBlackCappedShrike, UserWhiteCappedShrike, UserRedCappedShrike, UserYellowCappedShrike, UserGreenCappedShrike, UserBlueCappedShrike, UserPurpleCappedShrike, UserOrangeCappedShrike, UserPinkCappedShrike, UserGreyCappedShrike, UserBrownCappedShrike, UserBlackFacedShrike, UserWhiteFacedShrike, UserRedFacedShrike, UserYellowFacedShrike, UserGreenFacedShrike, UserBlueFacedShrike, UserPurpleFacedShrike, UserOrangeFacedShrike, UserPinkFacedShrike, UserGreyFacedShrike, UserBrownFacedShrike, UserBlackThroatedShrike, UserWhiteThroatedShrike, UserRedThroatedShrike, UserYellowThroatedShrike, UserGreenThroatedShrike, UserBlueThroatedShrike, UserPurpleThroatedShrike, UserOrangeThroatedShrike, UserPinkThroatedShrike, UserGreyThroatedShrike, UserBrownThroatedShrike, UserBlackBreastedShrike, UserWhiteBreastedShrike, UserRedBreastedShrike, UserYellowBreastedShrike, UserGreenBreastedShrike, UserBlueBreastedShrike, UserPurpleBreastedShrike, UserOrangeBreastedShrike, UserPinkBreastedShrike, UserGreyBreastedShrike, UserBrownBreastedShrike, UserBlackBelliedShrike, UserWhiteBelliedShrike, UserRedBelliedShrike, UserYellowBelliedShrike, UserGreenBelliedShrike, UserBlueBelliedShrike, UserPurpleBelliedShrike, UserOrangeBelliedShrike, UserPinkBelliedShrike, UserGreyBelliedShrike, UserBrownBelliedShrike
 } from 'lucide-react';
 
@@ -24,18 +24,18 @@ const ICON_MAP = {
   'money': Landmark, 'salary': CreditCard, 'work': Briefcase,
   'education': GraduationCap, 'tech': Smartphone,
   'other': MoreHorizontal, 'love': Heart,
-  'book': Book, 'bus': Bus, 'train': Train, 'truck': Truck, 'bicycle': Bicycle,
+  'book': Book, 'bus': Bus, 'train': Train, 'truck': Truck, 'bicycle': Bike,
   'apple': Apple, 'banana': Banana, 'beer': Beer, 'cake': Cake, 'camera': Camera,
   'film': Film, 'globe': Globe, 'mappin': MapPin, 'sun': Sun, 'moon': Moon,
-  'star': Star, 'tree': Tree, 'flower': Flower, 'leaf': Leaf, 'cloud': Cloud,
-  'snowflake': Snowflake, 'water': Water, 'fire': Fire, 'key': Key, 'lock': Lock,
+  'star': Star, 'tree': Trees, 'flower': Flower, 'leaf': Leaf, 'cloud': Cloud,
+  'snowflake': Snowflake, 'water': Droplet, 'fire': Flame, 'key': Key, 'lock': Lock,
   'bell': Bell, 'alarmclock': AlarmClock, 'wallet': Wallet, 'piggybank': PiggyBank,
   'shoppingcart': ShoppingCart, 'shirt': Shirt, 'glasses': Glasses, 'watch': Watch,
   'tablet': Tablet, 'tv': Tv, 'speaker': Speaker, 'headphones': Headphones,
   'printer': Printer, 'cpu': Cpu, 'mousepointer': MousePointer, 'pen': Pen,
   'pencil': Pencil, 'paintbrush': Paintbrush, 'ruler': Ruler, 'calculator': Calculator,
   'clipboard': Clipboard, 'paperclip': Paperclip, 'archive': Archive, 'box': Box,
-  'package': Package, 'truckdelivery': TruckDelivery, 'rocket': Rocket, 'medal': Medal,
+  'package': Package, 'truckdelivery': Truck, 'rocket': Rocket, 'medal': Medal,
   'trophy': Trophy, 'award': Award, 'flag': Flag, 'target': Target, 'lightbulb': Lightbulb,
   'battery': Battery, 'plug': Plug, 'wifi': Wifi, 'bluetooth': Bluetooth, 'signal': Signal,
 };
@@ -48,6 +48,9 @@ const CategoryIcon = ({ iconName, className = "w-6 h-6" }) => {
   if (IconComp) return <IconComp className={className} />;
   return <span className="text-xl leading-none">{iconName || '?'}</span>;
 };
+
+// Use same-origin requests in the browser and rely on Next.js `rewrites()` to reach the backend.
+const API_BASE = '';
 
 export default function AddTransaction() {
   const [formData, setFormData] = useState({
@@ -73,6 +76,7 @@ export default function AddTransaction() {
   const [ocrLoading, setOcrLoading] = useState(false);
   const [ocrText, setOcrText] = useState('');
   const [selectedImage, setSelectedImage] = useState(null);
+  const [aiSelectedImage, setAiSelectedImage] = useState(null);
   
   // OCR Test Results State (NEW)
   const [ocrTestResults, setOcrTestResults] = useState({
@@ -101,6 +105,18 @@ export default function AddTransaction() {
   const [newCategory, setNewCategory] = useState('');
   const [selectedIcon, setSelectedIcon] = useState('food'); // Default icon key
   // Remove type selection for new category
+
+  // OpenAI Slip + Audio (server-side)
+  const [aiSlipLoading, setAiSlipLoading] = useState(false);
+  const [aiSlipError, setAiSlipError] = useState('');
+  const [aiSlipResult, setAiSlipResult] = useState(null);
+
+  const [aiAudioRecording, setAiAudioRecording] = useState(false);
+  const [aiAudioLoading, setAiAudioLoading] = useState(false);
+  const [aiAudioError, setAiAudioError] = useState('');
+  const [aiAudioTranscript, setAiAudioTranscript] = useState('');
+  const [aiMediaRecorder, setAiMediaRecorder] = useState(null);
+  const [aiMediaStream, setAiMediaStream] = useState(null);
 
   // --- THEME HELPER ---
   const isExpense = formData.type === 'expense';
@@ -135,9 +151,183 @@ export default function AddTransaction() {
     }
   }, []);
 
+  useEffect(() => {
+    return () => {
+      try {
+        if (aiMediaRecorder && aiMediaRecorder.state !== 'inactive') aiMediaRecorder.stop();
+      } catch {
+        // ignore
+      }
+      try {
+        if (aiMediaStream) aiMediaStream.getTracks().forEach((t) => t.stop());
+      } catch {
+        // ignore
+      }
+    };
+  }, [aiMediaRecorder, aiMediaStream]);
+
+  const pickDefaultCategoryId = (type) => {
+    const match = categories.find((c) => c.type === type);
+    return (match || categories[0])?._id || '';
+  };
+
+  const applyAiSlipToForm = (parsed) => {
+    if (!parsed || typeof parsed !== 'object') return;
+    setFormData((prev) => {
+      const nextType =
+        parsed.direction === 'in' ? 'income' : parsed.direction === 'out' ? 'expense' : prev.type;
+      const nextCategory =
+        prev.category && categories.find((c) => c._id === prev.category && c.type === nextType)
+          ? prev.category
+          : pickDefaultCategoryId(nextType);
+
+      const notesBits = [
+        prev.notes,
+        parsed.notes,
+        parsed.recipient_name ? `ผู้รับ: ${parsed.recipient_name}` : null,
+        parsed.sender_name ? `ผู้โอน: ${parsed.sender_name}` : null,
+        parsed.reference ? `อ้างอิง: ${parsed.reference}` : null,
+      ].filter(Boolean);
+
+      return {
+        ...prev,
+        type: nextType,
+        category: nextCategory,
+        amount: parsed.amount != null && Number.isFinite(Number(parsed.amount)) ? String(parsed.amount) : prev.amount,
+        date: parsed.date || prev.date,
+        notes: notesBits.join(' | ').slice(0, 500),
+      };
+    });
+  };
+
+  const handleAiSlipScan = async (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (event) => setAiSelectedImage(event.target.result);
+    reader.readAsDataURL(file);
+
+    setAiSlipLoading(true);
+    setAiSlipError('');
+    setAiSlipResult(null);
+
+    try {
+      const token = localStorage.getItem('token');
+      const form = new FormData();
+      form.append('image', file, file.name || 'slip.jpg');
+
+      const res = await fetch(`${API_BASE}/api/ai/slip`, {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${token}` },
+        body: form,
+      });
+      const data = await res.json();
+      if (!res.ok || !data?.success) {
+        setAiSlipError(data?.error || data?.message || 'อ่านสลิปไม่สำเร็จ');
+        return;
+      }
+
+      const parsed = data?.parsed || null;
+      setAiSlipResult(parsed);
+      applyAiSlipToForm(parsed);
+    } catch (err) {
+      setAiSlipError(err?.message || 'เกิดข้อผิดพลาดในการเชื่อมต่อ');
+    } finally {
+      setAiSlipLoading(false);
+    }
+  };
+
+  const startAiAudioRecording = async () => {
+    setAiAudioError('');
+    setAiAudioTranscript('');
+
+    if (!navigator?.mediaDevices?.getUserMedia) {
+      setAiAudioError('เบราว์เซอร์นี้ไม่รองรับการอัดเสียง');
+      return;
+    }
+
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      setAiMediaStream(stream);
+
+      if (!window.MediaRecorder) {
+        try {
+          stream.getTracks().forEach((t) => t.stop());
+        } catch {
+          // ignore
+        }
+        setAiMediaStream(null);
+        setAiAudioError('เบราว์เซอร์นี้ไม่รองรับ MediaRecorder');
+        return;
+      }
+
+      const preferredTypes = ['audio/webm;codecs=opus', 'audio/webm', 'video/webm'];
+      const mimeType = preferredTypes.find((t) => window.MediaRecorder?.isTypeSupported?.(t)) || '';
+      const recorder = new MediaRecorder(stream, mimeType ? { mimeType } : undefined);
+
+      const chunks = [];
+      recorder.ondataavailable = (evt) => {
+        if (evt.data && evt.data.size > 0) chunks.push(evt.data);
+      };
+      recorder.onerror = () => setAiAudioError('อัดเสียงไม่สำเร็จ');
+      recorder.onstop = async () => {
+        try {
+          setAiAudioLoading(true);
+          const blob = new Blob(chunks, { type: recorder.mimeType || 'audio/webm' });
+
+          const token = localStorage.getItem('token');
+          const form = new FormData();
+          form.append('audio', blob, 'recording.webm');
+
+          const res = await fetch(`${API_BASE}/api/ai/transcribe`, {
+            method: 'POST',
+            headers: { Authorization: `Bearer ${token}` },
+            body: form,
+          });
+          const data = await res.json();
+          if (!res.ok || !data?.success) {
+            setAiAudioError(data?.error || data?.message || 'ถอดเสียงไม่สำเร็จ');
+            return;
+          }
+
+          const text = String(data?.text || '');
+          setAiAudioTranscript(text);
+          if (text) parseTranscript(text);
+        } catch (err) {
+          setAiAudioError(err?.message || 'เกิดข้อผิดพลาดในการเชื่อมต่อ');
+        } finally {
+          setAiAudioLoading(false);
+          try {
+            stream.getTracks().forEach((t) => t.stop());
+          } catch {
+            // ignore
+          }
+          setAiMediaStream(null);
+          setAiMediaRecorder(null);
+        }
+      };
+
+      setAiMediaRecorder(recorder);
+      setAiAudioRecording(true);
+      recorder.start();
+    } catch (err) {
+      setAiAudioError(err?.message || 'ไม่สามารถเข้าถึงไมโครโฟน');
+    }
+  };
+
+  const stopAiAudioRecording = () => {
+    try {
+      if (aiMediaRecorder && aiMediaRecorder.state !== 'inactive') aiMediaRecorder.stop();
+    } catch {
+      // ignore
+    }
+    setAiAudioRecording(false);
+  };
+
   const fetchCategories = async (token) => {
     try {
-      const res = await fetch('http://localhost:5050/api/categories', {
+      const res = await fetch(`${API_BASE}/api/categories`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await res.json();
@@ -171,7 +361,7 @@ export default function AddTransaction() {
         try {
           const token = localStorage.getItem('token');
           // Add type field, default to current transaction type
-          const res = await fetch('http://localhost:5050/api/categories', {
+          const res = await fetch(`${API_BASE}/api/categories`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -210,7 +400,7 @@ export default function AddTransaction() {
         // ... (Assume budget check passed)
         
         if (window.confirm(`คุณแน่ใจหรือไม่ว่าต้องการลบหมวดหมู่ "${categories.find(cat => cat._id === categoryId)?.name}"?`)) {
-          const res = await fetch(`http://localhost:5050/api/categories/${categoryId}`, {
+          const res = await fetch(`${API_BASE}/api/categories/${categoryId}`, {
             method: 'DELETE',
             headers: { Authorization: `Bearer ${token}` },
           });
@@ -237,7 +427,7 @@ export default function AddTransaction() {
      if (newName && newName.trim()) {
          try {
              const token = localStorage.getItem('token');
-             await fetch(`http://localhost:5050/api/categories/${category._id}`, {
+             await fetch(`${API_BASE}/api/categories/${category._id}`, {
                  method: 'PUT',
                  headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
                  body: JSON.stringify({ name: newName, icon: category.icon, type: category.type })
@@ -815,7 +1005,7 @@ export default function AddTransaction() {
 
     try {
       const token = localStorage.getItem('token');
-      const res = await fetch('http://localhost:5050/api/transactions', {
+      const res = await fetch(`${API_BASE}/api/transactions`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
         body: JSON.stringify({ ...formData, amount: parseFloat(formData.amount) }),
@@ -982,19 +1172,44 @@ export default function AddTransaction() {
               </div>
             )}
 
+            {/* OpenAI Audio Transcription */}
+            <div className="pt-2">
+              <label className="text-xs font-bold text-slate-500 mb-2 block uppercase tracking-wider">อัดเสียงแล้วถอดเสียง (AI)</label>
+              <button
+                type="button"
+                onClick={aiAudioRecording ? stopAiAudioRecording : startAiAudioRecording}
+                disabled={aiAudioLoading}
+                className={`w-full p-4 rounded-2xl flex items-center justify-center gap-3 transition-all duration-300 relative overflow-hidden ${
+                  aiAudioRecording
+                    ? 'bg-red-50 text-red-600 border border-red-200'
+                    : 'bg-slate-50 text-slate-600 border border-slate-200 hover:bg-slate-100'
+                } ${aiAudioLoading ? 'opacity-70 cursor-wait' : ''}`}
+              >
+                <div className={`p-2 rounded-full transition-colors ${
+                  aiAudioRecording ? 'bg-red-500 text-white animate-pulse' : 'bg-slate-200 text-slate-500'
+                }`}>
+                  {aiAudioRecording ? <MicOff className="w-5 h-5" /> : <Mic className="w-5 h-5" />}
+                </div>
+                <span className="font-semibold text-sm">
+                  {aiAudioLoading ? 'กำลังถอดเสียง...' : aiAudioRecording ? 'กำลังอัด... (คลิกเพื่อหยุด)' : 'กดเพื่ออัดเสียง'}
+                </span>
+              </button>
+              {aiAudioError && <p className="mt-2 text-xs text-rose-600 text-center">{aiAudioError}</p>}
+              {aiAudioTranscript && <p className="mt-2 text-xs text-slate-400 text-center">{aiAudioTranscript}</p>}
+            </div>
+
             {/* OCR Bill Scanner */}
             <div className="pt-2">
               <label className="text-xs font-bold text-slate-500 mb-2 block uppercase tracking-wider">สแกนบิล (OCR)</label>
               <div className="relative">
-                <input
-                  type="file"
-                  accept="image/*"
-                  capture="environment"
-                  onChange={handleOcrScan}
-                  disabled={ocrLoading}
-                  className="hidden"
-                  id="ocr-upload"
-                />
+	                <input
+	                  type="file"
+	                  accept="image/*"
+	                  onChange={handleOcrScan}
+	                  disabled={ocrLoading}
+	                  className="hidden"
+	                  id="ocr-upload"
+	                />
                 <label
                   htmlFor="ocr-upload"
                   className={`w-full p-4 rounded-2xl flex items-center justify-center gap-3 transition-all duration-300 cursor-pointer ${
@@ -1172,6 +1387,76 @@ export default function AddTransaction() {
 
                     {/* Supported Banks/Receipt Types Info */}
                     
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* OpenAI Slip Reader */}
+            <div className="pt-2">
+              <label className="text-xs font-bold text-slate-500 mb-2 block uppercase tracking-wider">สแกนสลิป (AI)</label>
+              <div className="relative">
+	                <input
+	                  type="file"
+	                  accept="image/*"
+	                  onChange={handleAiSlipScan}
+	                  disabled={aiSlipLoading}
+	                  className="hidden"
+	                  id="ai-slip-upload"
+	                />
+                <label
+                  htmlFor="ai-slip-upload"
+                  className={`w-full p-4 rounded-2xl flex items-center justify-center gap-3 transition-all duration-300 cursor-pointer ${
+                    aiSlipLoading
+                      ? 'bg-blue-50 text-blue-600 border border-blue-200 cursor-wait'
+                      : 'bg-gradient-to-r from-blue-50 to-indigo-50 text-blue-700 border border-blue-200 hover:from-blue-100 hover:to-indigo-100'
+                  }`}
+                >
+                  <div className={`p-2 rounded-full transition-colors ${
+                    aiSlipLoading ? 'bg-blue-500 text-white animate-pulse' : 'bg-blue-200 text-blue-700'
+                  }`}>
+                    {aiSlipLoading ? (
+                      <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                    ) : (
+                      <ScanLine className="w-5 h-5" />
+                    )}
+                  </div>
+                  <span className="font-semibold text-sm">
+                    {aiSlipLoading ? 'กำลังอ่านสลิป...' : 'ถ่ายรูป/อัปโหลดสลิปโอนเงิน'}
+                  </span>
+                </label>
+
+                {aiSelectedImage && (
+                  <div className="mt-3 rounded-xl overflow-hidden border border-slate-200">
+                    <img src={aiSelectedImage} alt="Slip Preview" className="w-full h-32 object-cover" />
+                  </div>
+                )}
+
+                {aiSlipError && (
+                  <p className="mt-2 text-xs text-rose-600 text-center">{aiSlipError}</p>
+                )}
+
+                {aiSlipResult && (
+                  <div className="mt-2 p-3 bg-blue-50 border border-blue-100 rounded-xl">
+                    <p className="text-xs font-bold text-blue-700 mb-2">ผลลัพธ์จาก AI:</p>
+                    <div className="grid grid-cols-2 gap-2 text-xs text-slate-700">
+                      <div className="bg-white/80 rounded-lg p-2">
+                        <span className="text-slate-500">จำนวนเงิน</span>
+                        <p className="font-semibold">{aiSlipResult.amount ?? '-'}</p>
+                      </div>
+                      <div className="bg-white/80 rounded-lg p-2">
+                        <span className="text-slate-500">วันที่</span>
+                        <p className="font-semibold">{aiSlipResult.date || '-'}</p>
+                      </div>
+                      <div className="bg-white/80 rounded-lg p-2">
+                        <span className="text-slate-500">ผู้โอน</span>
+                        <p className="font-semibold truncate">{aiSlipResult.sender_name || '-'}</p>
+                      </div>
+                      <div className="bg-white/80 rounded-lg p-2">
+                        <span className="text-slate-500">ผู้รับ</span>
+                        <p className="font-semibold truncate">{aiSlipResult.recipient_name || '-'}</p>
+                      </div>
+                    </div>
                   </div>
                 )}
               </div>

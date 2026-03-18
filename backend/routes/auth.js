@@ -6,6 +6,8 @@ const router = express.Router();
 const nodemailer = require('nodemailer');
 const crypto = require('crypto');
 const path = require('path');
+const LineMessagingLinkSession = require('../models/LineMessagingLinkSession');
+const { mergeUsers } = require('../utils/mergeUsers');
 
 
 // Middleware to verify JWT
@@ -15,9 +17,11 @@ const authMiddleware = (req, res, next) => {
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    if (!decoded || !decoded.exp) return res.status(401).json({ message: 'Token expired' });
     req.user = decoded;
     next();
   } catch (error) {
+    if (error && error.name === 'TokenExpiredError') return res.status(401).json({ message: 'Token expired' });
     res.status(401).json({ message: 'Invalid token' });
   }
 };
@@ -48,7 +52,11 @@ router.post('/register', async (req, res) => {
     const user = new User({ email, password: hashedPassword, name: name || '' });
     await user.save();
 
-    const token = jwt.sign({ userId: user._id, role: user.role }, process.env.JWT_SECRET);
+    const token = jwt.sign(
+      { userId: user._id, role: user.role },
+      process.env.JWT_SECRET,
+      { expiresIn: process.env.JWT_EXPIRES_IN || '7d' }
+    );
     res.status(201).json({ token, user: { email, name: user.name, role: user.role } });
   } catch (error) {
     console.error('Registration error:', error);
@@ -77,7 +85,11 @@ router.post('/login', async (req, res) => {
       return res.status(400).json({ message: 'ข้อมูลไม่ถูกต้อง' });
     }
 
-    const token = jwt.sign({ userId: user._id, role: user.role }, process.env.JWT_SECRET);
+    const token = jwt.sign(
+      { userId: user._id, role: user.role },
+      process.env.JWT_SECRET,
+      { expiresIn: process.env.JWT_EXPIRES_IN || '7d' }
+    );
     res.json({ token, user: { email, name: user.name, role: user.role } });
   } catch (error) {
     console.error('Login error:', error);
@@ -85,25 +97,72 @@ router.post('/login', async (req, res) => {
   }
 });
 
-// Get user profile
-router.get('/me', authMiddleware, async (req, res) => {
-  console.log('Fetching user for ID:', req.user.userId);
-  try {
-    const user = await User.findById(req.user.userId).select('-password');
-    if (!user) {
-      console.log('User not found for ID:', req.user.userId);
-      return res.status(404).json({ message: 'User not found' });
-    }
-    res.json({
-      name: user.name,
-      email: user.email,
-      profilePic: user.profilePic || ''
-    });
-  } catch (error) {
-    console.error('Profile fetch error:', error);
-    res.status(500).json({ message: 'Server error' });
-  }
-});
+	// Get user profile
+	router.get('/me', authMiddleware, async (req, res) => {
+	  console.log('Fetching user for ID:', req.user.userId);
+	  try {
+	    const user = await User.findById(req.user.userId).select('-password');
+	    if (!user) {
+	      console.log('User not found for ID:', req.user.userId);
+	      return res.status(401).json({ message: 'Invalid token' });
+	    }
+	    res.json({
+	      id: user._id,
+	      name: user.name,
+	      email: user.email,
+	      profilePic: user.profilePic || '',
+	      lineUserId: user.lineUserId || '',
+	      lineMessagingUserId: user.lineMessagingUserId || ''
+	    });
+	  } catch (error) {
+	    console.error('Profile fetch error:', error);
+	    res.status(500).json({ message: 'Server error' });
+	  }
+	});
+
+	// Link LINE Messaging API account (web login account) via short-lived code from bot chat
+	router.post('/link-line-messaging', authMiddleware, async (req, res) => {
+	  try {
+	    const rawCode = String(req.body?.code || '').trim();
+	    if (!rawCode) return res.status(400).json({ message: 'Missing code' });
+
+	    const secret = process.env.SESSION_TOKEN_SECRET || process.env.JWT_SECRET || process.env.LINE_CHANNEL_SECRET || 'dev-session-secret';
+	    const codeHash = crypto.createHmac('sha256', String(secret)).update(rawCode).digest('hex');
+
+	    const session = await LineMessagingLinkSession.findOne({ codeHash });
+	    if (!session) return res.status(404).json({ message: 'Code not found' });
+	    if (session.usedAt) return res.status(410).json({ message: 'Code already used' });
+	    if (session.expiresAt && session.expiresAt.getTime() < Date.now()) return res.status(410).json({ message: 'Code expired' });
+
+	    const lineMessagingUserId = String(session.lineMessagingUserId || '').trim();
+	    if (!lineMessagingUserId) return res.status(500).json({ message: 'Invalid session payload' });
+
+	    const currentUser = await User.findById(req.user.userId);
+	    if (!currentUser) return res.status(404).json({ message: 'User not found' });
+
+	    // If another (bot-only) user already owns this messaging id, migrate their data
+	    // so the web account and bot account become a single backend user.
+	    const other = await User.findOne({ lineMessagingUserId });
+	    if (other && String(other._id) !== String(currentUser._id)) {
+	      const otherEmail = String(other.email || '');
+	      const safeToDelete =
+	        !other.password &&
+	        (otherEmail.endsWith('@local') || /^line_/i.test(otherEmail) || /^line_msg_/i.test(otherEmail));
+	      await mergeUsers({ fromUserId: other._id, toUserId: currentUser._id, deleteSource: safeToDelete });
+	    }
+
+	    currentUser.lineMessagingUserId = lineMessagingUserId;
+	    await currentUser.save();
+
+	    session.usedAt = new Date();
+	    await session.save();
+
+	    return res.json({ ok: true, lineMessagingUserId });
+	  } catch (err) {
+	    console.error('link-line-messaging error', err);
+	    return res.status(500).json({ message: 'Server error: ' + (err?.message || 'Unknown error') });
+	  }
+	});
 
 // Update user profile
 router.put('/me', authMiddleware, async (req, res) => {

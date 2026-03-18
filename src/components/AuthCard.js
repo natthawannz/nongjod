@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 
-export default function AuthCard({ children, leftTitle = "Balanz.IA", leftSubtitle = "Hello Welcome!" }) {
+export default function AuthCard({ children, leftTitle = "น้องจิ๋วช่วยจด", leftSubtitle = "Hello Welcome!" }) {
   return (
     <div className="bg-[#2d2d2d]">
       <main className="min-h-screen flex items-center justify-center">
@@ -35,4 +35,3 @@ export default function AuthCard({ children, leftTitle = "Balanz.IA", leftSubtit
     </div>
   );
 }
-

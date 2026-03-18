@@ -1,15 +1,18 @@
 const mongoose = require('mongoose');
 
 const transactionSchema = new mongoose.Schema({
-  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
-  amount: { type: Number, required: true },
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true, index: true },
   type: { type: String, enum: ['income', 'expense'], required: true },
-  category: { type: mongoose.Schema.Types.ObjectId, ref: 'Category', required: true }, // เปลี่ยนเป็น ObjectId
-  date: { type: Date, required: true },
-  notes: { type: String, default: '' },
+  amount: { type: Number, required: true },
+  note: { type: String, default: '' },
+  categoryId: { type: mongoose.Schema.Types.ObjectId, ref: 'Category', required: false },
+  datetime: { type: Date, required: true, default: Date.now },
+  source: { type: String, enum: ['text', 'slip', 'slip_ai', 'voice'], default: 'text' },
+  rawMessage: { type: mongoose.Schema.Types.Mixed }, // เก็บ raw message/payload เสมอ
 }, {
-  timestamps: true,
-  indexes: [{ key: { userId: 1, date: -1 } }]
+  timestamps: true
 });
+
+transactionSchema.index({ userId: 1, datetime: -1 });
 
 module.exports = mongoose.model('Transaction', transactionSchema);
